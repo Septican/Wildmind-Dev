@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+var counter = 0;
+
+ID = window.setTimeout("Update();", 2000);
+
+function Update(){
+		counter++;
+		document.form1.input1.value = "The counter is now at " + counter;
+		// újabb késleltetés beállítása
+		ID = window.setTimeout("Update();", 2000);
+}
+
+	
+
+</script>
+</head>
+
+<body>
+	<h1>Timeout and windows fun example</h1>
+	<p></p>
+
+<form name="form1">
+	<input type="text" name="input1" size="40"><br />
+	<input type="button" value="reset" onclick="counter = 0;"><br />
+	<input type="button" value="stop" onclick="window.clearTimeout(ID);">	
+</form>
+
+<input type="button" value="Display an alert" onclick="window.alert('This is a test alert');">
+<input type="button" value="Display a confirm" onclick="window.confirm('Please confirm your leaving');">	
+<input type="button" value="Display a prompt" onclick="window.prompt('Enter some text for me please:','This is the default text in the input');">		
+	
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+now = new Date();
+
+
+hours = now.getHours();
+mins = now.getMinutes();
+secs = now.getSeconds();
+
+document.write("<h2>" + hours + ":" + mins + ":" + secs + "</h2>");
+document.write("<p>");
+if ( hours < 10 ) document.write("Good Morning");
+else if ( hours >= 10 && hours <=17 ) document.write("Good Afternoon");
+else if ( hours > 17 ) document.write("Good evening");
+else document.write("Good day");
+document.write("</p>");
+
+
+
+/* bevitel */
+
+names = new Array();
+i = 0;
+
+do {
+	next = window.prompt("Írja be a következő nevet", "");
+	if ( next > " ") names[i] = next;
+	i = i + 1;
+}
+while (next > " "  && i < 3);
+
+document.write("<h2>" + (names.length) + " names entered.</h2>");
+
+//nevek kiírása 
+document.write("<ul>");
+for (i in names) {
+	document.write("<li>" + names[i] + "</li>");
+	}
+document.write("</ul>");	
+
+</script>
+</head>
+
+<body>
+	<h1>Függvények</h1>
+	<p>the following is the result of the call:</p>
+	
+	
+	
+</body>
+</html>

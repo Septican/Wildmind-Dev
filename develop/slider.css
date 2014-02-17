@@ -1,0 +1,102 @@
+
+	
+ul {
+	display:block;
+	list-style:none;
+	position:relative;
+	margin:40px;
+}	
+
+ul li {
+	display:none;
+	float:left;
+	width:400px;
+	height:400px;
+	overflow:hidden;
+	position:absolute;
+	top:0;
+	left:0;	
+}
+
+ul li img {
+	
+	
+}
+
+#next {
+	background:url('next.png') center center no-repeat;
+	width:72px;
+	height:72px;
+	position: absolute;
+	top:50%;
+	margin-top:-36px;
+	right:36px;
+	text-indent:-9999px;
+}
+
+#prev {	
+	background:url('prev.png') center center no-repeat;
+	width:72px;
+	height:72px;
+	position: absolute;
+	top:50%;
+	margin-top:-36px;
+	left:36px;
+	text-indent:-9999px;
+}
+
+.current {
+	display:block;
+	-webkit-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-moz-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-o-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-ms-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	animation: fromRightAnim5 0.4s ease-in 0.4s both;
+}
+
+@-webkit-keyframes fromRightAnim5{
+	0%{ left: 0%; opacity: 0; }
+	100%{ left: 0%; opacity: 1; }
+}
+.hidden {
+	display:none;
+}
+
+
+
+#paginator{
+	margin:0;
+	display:block;
+	width:300px;
+	height:24px;
+	position:absolute;
+	bottom:10px;
+	left:50%;
+	z-index:1001;	
+	height:120px;
+	display:block;
+	
+	
+}
+
+#paginator li {
+	background:red;
+	display:block;
+	width:24px;
+	height:24px;
+	border-radius:50%;
+	margin:10px;
+	float:left;
+	position:relative;
+	z-index:10001;	
+	top:0;	
+	color:#fff;
+	text-align:center;
+	text-indent:-9999px;
+}
+
+#paginator li:hover {
+		background:black;
+		cursor:pointer;
+	
+}

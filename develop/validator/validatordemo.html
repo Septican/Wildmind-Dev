@@ -1,0 +1,291 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link rel="stylesheet" href="slider.css">
+<script type="text/javascript">
+
+
+/*************************************************************************************************/
+
+function validateEmail(sEmail) {
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (filter.test(sEmail)) {
+        return true;
+    }
+     else {
+        return false;
+     }
+}
+
+/*************************************************************************************************/
+
+function validatePhone(cPhone) {
+    var a = document.getElementById(cPhone).value;
+    var filter = /^[0-9-+]+$/;
+    if (filter.test(a)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+/*************************************************************************************************/
+
+
+function colorChange() {
+
+    i = document.contactform.country.selectedIndex;
+    var country = document.contactform.country.options[i].innerHTML;
+    return country;
+
+}
+
+/*************************************************************************************************/
+
+function newCoworker() {
+    var newWorker = document.getElementById("coName");
+
+    newWorker.innerHTML += "<span>Width: <input type='text'style='width:48px;'value='' /><small>(ft)</small></span> X <span>Length: <input type='text' style='width:48px'  value='' /><small>(ft)</small</span>";
+    
+    $( "input type='text'" ).appendTo('#coName').attr('id', 'paginator'+this.i);
+    
+ 	
+    
+    this.i++;
+
+    console.log(this.i);
+
+    if ( this.i == "9" ) this.addMore.onclick = false, alert('no more');
+
+}
+
+/*************************************************************************************************/
+
+
+
+
+function validation() {
+
+	this.people = new Array();
+
+    this.addMore = document.getElementById('addMore');
+    
+    this.newCoworker = newCoworker;
+
+    this.i = 0;
+
+    this.companyname = document.contactform.companyname.value;
+    this.companytel = document.contactform.companytel.value;
+    this.companyemail = document.contactform.companyemail.value;
+    this.companyadrs = document.contactform.companyadrs.value;
+
+    this.country = document.getElementById("country");
+    
+    
+    this.addMore.onclick = function() {
+        newCoworker();
+    };
+
+
+    this.country.onChange = function() {
+        colorChange();
+    };
+
+    send = document.getElementById("send");
+
+
+    send.onclick = function() {
+        alert(country);
+
+    };
+}
+
+
+/*************************************************************************************************/
+
+window.onload=validation;
+
+/*************************************************************************************************/
+
+
+$(document).ready(function(){
+
+
+     $('#pass').keyup(function(pa) {
+        var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+        var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+        if (false == enoughRegex.test($(this).val())) {
+            $('#passstrength').html('More Characters');
+        } else if (strongRegex.test($(this).val())) {
+            $('#passstrength').className = 'ok';
+            $('#passstrength').html('Strong!');
+        } else if (mediumRegex.test($(this).val())) {
+            $('#passstrength').className = 'alert';
+            $('#passstrength').html('Medium!');
+        } else {
+            $('#passstrength').className = 'error';
+            $('#passstrength').html('Weak!');
+        }
+        return true;
+    });
+
+    $('#confirmpass').blur(function(pc) {
+        if ( $('#confirmpass').html() == $('#confirmpass').html() ) {
+            $('#passcheck').className = 'passed';
+            $('#passcheck').html('Passwords are same!');
+
+        }
+        else {
+            $('#passcheck').className = 'error';
+            $('#passcheck').html('Passwords are not the same!');
+        }
+    });
+
+    $('#cPhone').blur(function(ph) {
+        if (validatePhone('cPhone')) {
+            $('#phonecheck').html('Valid');
+            $('#phonecheck').css('color', 'green');
+        }
+        else {
+            $('#phonecheck').html('Invalid');
+            $('#phonecheck').css('color', 'red');
+        }
+    });
+
+    $('#companyemail').blur(function(em) {
+        var sEmail = $('#companyemail').val();
+        if ($.trim(sEmail).length == 0) {
+            $('#mailcheck').html('Please enter valid email address');
+            em.preventDefault();
+        }
+        else if (validateEmail(sEmail)) {
+            $('#mailcheck').html('Email is valid');
+        }
+        else {
+            $('#mailcheck').html('Invalid Email Address');
+            em.preventDefault();
+        }
+    });
+
+});
+
+
+/*************************************************************************************************/
+
+</script>
+</head>
+
+<body>
+
+
+<div id="validator">
+<div id="coName"></div>
+
+<form name="contactform" id="contactform" >
+<table class="maindatas">
+    <tr>
+        <td>Company name
+            <input type="text" name="companyname[]" id="" value="" />
+        </td>
+    </tr>
+    <tr>
+        <td>Company telephone
+            <input type="text" name="companytel[]" id="cPhone" value="" /><span id="phonecheck"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>Company email
+            <input type="text" name="companyemail[]" id="companyemail" value="" /><span id="mailcheck"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>Company address
+            <input type="text" name="companyadrs[]" id="" value="" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select id="country" name="country[]">
+                <option value="0" selected >Hungary</option>
+                <option value="1">USA</option>
+                <option value="2">Russia</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Enter password
+            <input type="text" name="companypass[]" id="pass" value="" /><span id="passstrength"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Confirm password
+            <input type="text" name="confirmpass[]" id="confirmpass" value="" /><span id="passcheck"></span>
+        </td>
+    </tr>
+</table>
+<table class="contactperson">
+    <tr>
+        <td>
+            <input type="text" name="companyname[]" id="" value="Company name" />
+        </td>
+        <td>
+            <input type="text" name="companytel[]" id="" value="Company telephone" />
+        </td>
+        <td>
+            <input type="text" name="companyemail[]" id="" value="Company email" />
+        </td>
+    </tr>
+
+</table>
+<input type="submit" id="send">
+<input type="button" id="addMore" value="addMore">
+</form>
+
+
+
+</div>
+
+
+
+</body>
+</html>
+
+$('input').each(function(){
+	
+	input = $(this);
+	
+	data_type = input.attr('data-type');
+	
+	if(data_type == 'password') {
+		
+		checkPassword();
+	
+	} else if(data_type == 'phone') {
+	
+		checkPhone();
+	
+	}
+	
+	switch <- 
+	
+
+});
+
+$('input[type="password"]')
+
+$('input[name="valami"]')
+
+$('input[data-type="email"]')
+$('input[data-type="phone"]')
+$('input[data-type="text"]')
+
+

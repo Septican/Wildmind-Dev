@@ -1,0 +1,40 @@
+
+
+
+body {
+	font:normal 12px Arial, Helvetica, sans-serif;
+	width:100%;
+}
+
+.maindatas {
+	display:block;
+	margin:40px auto;
+	width:640px;
+}
+
+.maindatas input, select {
+		width:240px;
+		border:1px solid #ccc;
+		height:30px;
+	}
+	
+.maindatas input[type="checkbox"] {
+		width:18px;
+		border:1px solid #ccc;
+		height:18px;
+	}
+	
+span {
+	padding-left:10px;
+	
+}	
+	
+.error {
+	color:red;
+	
+}
+	
+.ok {
+	color:green;
+	
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+
+	$(document).ready(function() {
+	
+		var arr = $.map( $("li"),function(item, index) {
+		
+			while (index < 3 ) {
+				return $(item).html();
+			}
+			return null;
+
+		});
+		
+		$("body").append("<span>The first 3 guys are:" + arr.join(", ") + "</span>")
+
+	});
+})(jQuery);
+
+</script>
+</head>
+<body>
+<h2>New York Yankees</h2>
+<ol>
+	<li>Jetter</li>
+	<li>Famon</li>
+	<li>Teixeira</li>
+	<li>Posada</li>
+	<li>Swisher</li>
+	<li>Cano</li>
+	<li>Cabrera</li>
+	<li>Molina</li>
+	<li>Ramson</li>
+</ol>
+
+
+
+
+</body>
+</html>

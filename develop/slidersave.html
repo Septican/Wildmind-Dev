@@ -1,0 +1,387 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<style>
+
+
+	
+ul {
+	display:block;
+	list-style:none;
+	position:relative;
+	margin:40px;
+}	
+
+ul li {
+	display:none;
+	float:left;
+	width:400px;
+	height:400px;
+	overflow:hidden;
+	position:absolute;
+	top:0;
+	left:0;	
+}
+
+ul li img {
+	
+	
+}
+
+#next {
+	background:url('next.png') center center no-repeat;
+	width:72px;
+	height:72px;
+	position: absolute;
+	top:50%;
+	margin-top:-36px;
+	right:36px;
+	text-indent:-9999px;
+}
+
+#prev {	
+	background:url('prev.png') center center no-repeat;
+	width:72px;
+	height:72px;
+	position: absolute;
+	top:50%;
+	margin-top:-36px;
+	left:36px;
+	text-indent:-9999px;
+}
+
+.current {
+	display:block;
+	-webkit-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-moz-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-o-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-ms-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	animation: fromRightAnim5 0.4s ease-in 0.4s both;
+}
+
+@-webkit-keyframes fromRightAnim5{
+	0%{ left: 0%; opacity: 0; }
+	100%{ left: 0%; opacity: 1; }
+}
+.hidden {
+	display:none;
+}
+
+
+
+#paginator{
+	margin:0;
+	display:block;
+	width:300px;
+	height:24px;
+	position:absolute;
+	bottom:10px;
+	left:50%;
+	z-index:1001;	
+	height:120px;
+	display:block;
+	
+	
+}
+
+#paginator li {
+	background:red;
+	display:block;
+	width:24px;
+	height:24px;
+	border-radius:50%;
+	margin:10px;
+	float:left;
+	position:relative;
+	z-index:10001;	
+	top:0;	
+	color:#fff;
+	text-align:center;
+	text-indent:-9999px;
+}
+
+#paginator li:hover {
+		background:black;
+		cursor:pointer;
+	
+}
+
+	
+</style>
+<script type="text/javascript">
+
+
+// myslider objektum létrehozása, felparaméterezése
+mySlider = { 
+	autoplay: true,  
+	paginator: "true",
+	buttons: "true",
+	pausehover: "true",
+	speed: 5000
+};
+
+
+
+
+
+/*************************************************************************************/
+
+function AutoPlay(current, hidden) {
+	
+	$(slides[currentslide]).removeClass(current).addClass(hidden);
+    currentslide++;
+    $(slides[currentslide]).removeClass(hidden);
+    //ha a slider végére érünk, a sorszám legyen 0
+    if (currentslide >= numslides) {
+   		 currentslide = 0;
+   		 $(slides[0]).removeClass(hidden);
+    }
+    $(slides[currentslide]).addClass(current);
+    
+    Play = setTimeout('AutoPlay(current, hidden)', speed);
+  
+}
+
+/*************************************************************************************/
+
+// next button
+function NextSlide(current, hidden) {
+	//1 eset
+    $(slides[currentslide]).removeClass(current).addClass(hidden);
+    //2. eset
+    //changeClass($(slides[currentslide]),current,hidden);
+
+    currentslide++;
+    $(slides[currentslide]).removeClass(hidden);
+    //ha a slider végére érünk, a sorszám legyen 0
+    if (currentslide >= numslides) {
+   		 currentslide = 0;
+   		 $(slides[0]).removeClass(hidden);
+    }
+    $(slides[currentslide]).addClass(current);
+    
+	clearTimeout(Play);
+
+}
+
+/*************************************************************************************/
+
+
+//prev button
+function PrevSlide(current, hidden) {
+    $(slides[currentslide]).removeClass(current).addClass(hidden);
+    currentslide--;
+    $(slides[currentslide]).removeClass(hidden);
+    if (currentslide < 0 ) {
+  		currentslide = (numslides - 1);
+  		$(slides[numslides - 1]).removeClass(hidden);
+    }
+    $(slides[currentslide]).addClass(current);
+    
+    clearTimeout(Play);
+}
+
+/*************************************************************************************/
+
+
+function paginator(current, hidden) {
+		$( "<ul></ul>" ).appendTo( "#wildslide" ).attr('id', 'paginator');		
+
+		for ( i=0; i<numslides; i++) {		
+			
+			var textValue = i;
+		    var ul = document.getElementById('paginator');
+		    var li = document.createElement("li");
+		    li.innerHTML = textValue;
+		    ul.insertBefore(li, ul.firstChild);	
+		    
+		    li.setAttribute("class", "dot");
+			
+		}; 	
+		
+		$(".dot").click(function(p) {
+			var target = $(this).index();
+			$(".current").removeClass(current).addClass(hidden);
+			$(slides[target]).removeClass(hidden).addClass(current);	
+			
+			clearTimeout(Play);
+					
+		});
+}		
+
+
+/*************************************************************************************/
+
+
+//alap változók megadása
+
+shownext = document.getElementById("next");
+showprev = document.getElementById("prev");
+
+
+var numslides = 0;
+var currentslide = 0;
+var slides = new Array();
+var speed = mySlider.speed;
+
+
+
+
+
+
+//wildSlide class
+function wildSlide() {
+  
+   /*
+   
+   this.numslides = 0;
+  
+   this.testPaginator = function () {
+		
+		$( "<ul></ul>" ).appendTo( "#wildslide" ).attr('id', 'paginator');		
+
+		for ( i=0; i<this.numslides; i++) {		
+			
+			var textValue = i;
+		    var ul = document.getElementById('paginator');
+		    var li = document.createElement("li");
+		    li.innerHTML = textValue;
+		    ul.insertBefore(li, ul.firstChild);	
+		    
+		    li.setAttribute("class", "dot");
+			
+		}; 	
+		
+		$(".dot").click(function(p) {
+			var target = $(this).index();
+			$(".current").removeClass(current).addClass(hidden);
+			$(slides[target]).removeClass(hidden).addClass(current);			
+		});
+   	
+   }	
+   
+   */
+   
+	
+
+
+
+   // find all images with the class "slide"
+   elements = document.getElementsByTagName("li");
+   shownext = document.getElementById("next");
+   showprev = document.getElementById("prev");
+  
+   current = "current";		  
+   hidden = "hidden";		
+   
+
+  
+   
+   for (i=0; i < elements.length; i++) {   
+   
+      if (elements[i].className != "slide") continue;     
+      slides[numslides]=elements[i];           
+      
+      // hide all but first element
+      if (numslides==0) {
+        var currentslide = elements[i];
+        $(currentslide).addClass(current);
+      } else {
+          var hiddenslide = elements[i];
+          $(hiddenslide).addClass(hidden);
+      }
+
+		numslides++;
+
+		
+		shownext.onclick = function() {
+			NextSlide(current,hidden);
+
+			
+		};
+		
+		showprev.onclick = function() {
+			PrevSlide(current, hidden);
+			
+		};
+	
+
+ 	} // end for loop
+   
+   
+   
+   //ha az autoplay true megjelenítjük, ha nem, a képváltás értéke 0
+   if (mySlider.autoplay === true) {   		
+   		Play = setTimeout('AutoPlay(current, hidden)', speed);
+   } else {
+   		//alert(mySlider.autoplay);
+		
+   };
+   
+   //ha a paginator true megjelenítjük, ha nem, akkor nem
+   if (mySlider.paginator == "true") {   		
+   		paginator(current, hidden);	
+   } else {
+   		
+   };
+   
+   
+   //ha a buttons true megjelenítjük, ha nem, akkor nem
+   if (mySlider.buttons == "false") {
+   		shownext.style.display = "none";
+   		showprev.style.display = "none";
+   } else {
+   		shownext.style.display = "block";
+   		showprev.style.display = "block";
+   };  
+   
+} // end MakeSlideShow()
+
+
+
+
+
+/*
+
+function changeClass( object, from, to ) {
+	
+	object.removeClass(from).addClass(to);
+	
+}
+
+*/
+
+
+
+
+// create the slideshow when the page loads
+window.onload=wildSlide;
+
+
+
+
+</script>
+</head>
+
+<body>
+	
+<span id="prev">prev</span>	
+<span id="next">next</span>	
+<div id="wildslide">
+	<ul>
+		<li class="slide"><img src="http://richard.wildmind.hu/images/thumbs/awakening.jpg" alt="" /></li>
+		<li class="slide"><img src="http://richard.wildmind.hu/images/thumbs/risen_thumb.jpg" alt="" /></li>
+		<li class="slide"><img src="http://richard.wildmind.hu/images/thumbs/rapture_thumb.jpg" alt="" /></li>
+		<li class="slide"><img src="http://richard.wildmind.hu/images/thumbs/alien_thumb.jpg" alt="" /></li>
+	</ul>	
+</div>	
+
+
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<!-- JS Code -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+/*	
+	$('div.menuitem').filter('.menuitem').addClass('extended');
+	$('div').find('b').andSelf().css('border','1px solid red');
+	
+*/	
+//	$('li:eq(1)').prev().css('border','1px solid red');
+	$('li:eq(0)').css('border','1px solid red');
+//	$('li:eq(1)').next().css('border','1px solid red');
+	
+	/**************************************************/
+
+	
+	var currentElementNum = 0;
+	var elementsMaxNumb = $('ul li').length;
+	
+	$('.next').click(function(){
+		//style reset
+		$('li').css('border','0px solid red');
+		currentElementNum++;
+		
+		//a megkeresett objektumot eltároljuk egy helyi változóban
+		currElement = $('li').eq(currentElementNum);
+
+
+		currElement.css('border','1px solid red');
+		
+
+	
+
+		if ( currentElementNum > elementsMaxNumb ) {
+		
+			currentElementNum = -1;
+			
+			
+		} 
+		else {
+			
+		}
+		
+		
+	});
+	
+	
+	
+	$('.prev').click(function(){
+		//style reset
+		$('li').css('border','0px solid red');
+		
+		currentElementNum--;
+		currElement = $('li').eq(currentElementNum);
+		currElement.css('border','1px solid red');
+		
+		var elementsNumb = $('ul li').length;
+
+		if ( currentElementNum < 1 ) {
+			
+			currentElementNum = elementsMaxNumb;		
+			
+		} 
+		else {
+			
+		}
+		
+		
+	});
+	
+	
+	
+	
+	
+	/**************************************************/
+
+	/* alert($('div').filter('.extended').length); */
+});
+</script>
+
+
+</head>
+
+<body>
+<div class="menuitem">old content</div>
+<div>old content</div>
+<div class="menuitem">old content</div>
+<div>old content<b>ALALALAL</b></div>
+<div>old content</div>
+<div>old content<b>ALALALAL</b></div>
+<p>The DOM is ready;</p>
+
+<div class="prev">PREV</div>
+<ul>
+	<li>111</li>
+	<li>222</li>
+	<li>333</li>
+	<li>444</li>
+	<li>555</li>
+	<li>666</li>
+</ul>
+<div class="next">NEXT</div>
+
+</body>
+<script type="text/javascript">
+	
+</script>
+</html>

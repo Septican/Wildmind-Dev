@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			function ember(nev,kor) {
+				this.nev = nev;
+				this.kor = kor;
+				this.nyugdij = nyugdijig;			
+			}			
+			var jani = new ember ("Kis Jani", 17);
+			var kati = new ember ("Kis Kati", 20);
+			
+			function nyugdijig() {
+				var x = 65 - this.kor;
+				return x;			
+			}			
+		</script>		
+	</head>
+	<body>
+		<script type="text/javascript">
+			document.write(jani.nyugdij());
+		</script>
+	</body>
+</html>

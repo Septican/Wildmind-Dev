@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="validator">
+<div id="coName"></div>
+
+<form name="ajaxform" id="ajaxform" method="post">
+
+<table class="maindatas">
+    <tr>
+        <td>Company name</td><td>
+            <input type="text" name="companyname[]" id="name" value="" /><span id="namecheck"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>Company telephone</td><td>
+            <input type="text" name="companytel[]" id="cPhone" value="" /><span id="phonecheck"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>Company email</td><td>
+            <input type="text" name="companyemail[]" id="" value="" /><span id="mailcheck"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>Company address</td><td>
+            <input type="text" name="companyadrs[]" id="" value="" /><span id="adrscheck"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>Country</td><td>
+            <select id="country" name="country[]" class="thecountry">
+            	<option value="0" selected>Please Select</option>
+                <option value="1" >Hungary</option>
+                <option value="2">USA</option>
+                <option value="3">Russia</option>
+            </select>
+            <span id="countrycheck"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>Company date</td><td>
+            <input type="text" name="companydate[]" id="" value="" /><span id="companydatebox"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Enter password</td><td>
+            <input type="text" name="companypass[]" id="pass" value="" /><span id="passstrength"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Confirm password</td><td>
+            <input type="text" name="confirmpass[]" id="confirmpass" value="" /><span id="passcheck"></span>
+        </td>        
+    </tr>
+    <tr>
+    	<td></td>
+    	<td><input type="checkbox" id="terms" name="terms" value="Accpet terms" >I accept the terms and conditions</td>
+    </tr>
+</table>
+
+<!--
+<table class="contactperson">
+    <tr>
+        <td>
+            <input type="text" name="companyname[]" id="" value="Company name" />
+        </td>
+        <td>
+            <input type="text" name="companytel[]" id="" value="Company telephone" />
+        </td>
+        <td>
+            <input type="text" name="companyemail[]" id="" value="Company email" />
+        </td>
+    </tr>
+
+</table>
+-->
+<input type="button" id="send" value="Sign Up">
+</form>
+</div>
+<div id="result"></div>
+<input type="button" id="addMore" value="addMore">
+
+<script src="script.js" type="text/javascript"></script>
+</body>
+</html>
+
+
+<!--
+$('input[type="password"]')
+
+$('input[name="valami"]')
+$('input[name="companypass"]').keyup(function(pa) 
+
+$('input[data-type="email"]')
+$('input[data-type="phone"]')
+$('input[data-type="text"]')
+
+-->
+
+

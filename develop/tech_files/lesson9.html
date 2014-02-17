@@ -1,0 +1,64 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+function cleardesc() {
+		d = document.getElementById("description");
+		d.innerHTML = "";
+	
+}
+
+function hover(e) {
+	//definiálva van e már az e
+	if(!e) var e = window.event;
+	whichlink = (e.target) ? e.target.id : e.srcElement.id;
+	//leírás kiválasztása
+	if ( whichlink == "order" ) desc = "Order a product";
+	else if  ( whichlink == "email" ) desc = "Send us a mail";
+	else if  ( whichlink == "complain" ) desc = "Insult us mofo";
+	//leírás megjelenítése
+	
+	d = document.getElementById("description");
+	d.innerHTML = desc;
+	
+	//esemény beállítása
+	orderlink = document.getElementById("order");
+	orderlink.onmouseover = hover;
+	orderlink.onmouseout = cleardesc;
+	emaillink = document.getElementById("email");
+	emaillink.onmouseover = hover;
+	emaillink.onmouseout = cleardesc;
+	complainlink = document.getElementById("complain");
+	complainlink.onmouseover = hover;
+	complainlink.onmouseout = cleardesc;
+	
+}
+
+</script>
+</head>
+
+<body>
+	<h1>Descriptive Links</h1>
+	<p>Move the mouse over the links, then move it out</p>
+	
+	<ul>
+		<li><a href="order.html" id="order">Order form</li>
+		<li><a href="email.html" id="email">Email form</li>
+		<li><a href="complain.html" id="complain">Complain form</li>		
+	</ul>
+	
+	<h2 id="description">Description</h2>
+	
+	
+</body>
+</html>

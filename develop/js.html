@@ -1,0 +1,185 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+
+<style>
+	section[name="home"] {	
+		display:block;
+		height:600px;
+		width:960px;
+		margin:0 auto;
+		border:1px solid #ddd;
+		
+	}
+	section {	
+		display:block;
+		height:600px;
+		width:960px;
+		margin:0 auto;
+		border:1px solid #ddd;
+		
+	}
+	
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$(".menu li a").click(function() {
+			$(".menu li").css("border","none");
+		    $(this).parent().css("border","1px solid red");
+		    
+		    baseurl = $(this).parent().attr('id');
+			src = "#" + baseurl + "box";
+					
+			$('.content').hide();
+			$(src).show().css({
+				'border':'1px solid red',
+				'width':'480px',
+				'height':'360px'				
+			});
+
+		    alert(src);	
+
+		});
+	
+	
+	$(".showdetails").click(function() {
+		    $('html, body').animate({
+		        scrollTop: $("#showit").offset().top
+		    }, 1000);
+		});
+		
+		
+		$('.holder').each(function(){
+			holder = $(this);
+			imgholder = holder.parent();
+			src = holder.attr('src');
+			imgholder.css("filter","progid:DXImageTransform.Microsoft.AlphaImageLoader(src="+src+", sizingMethod='scale')");
+			imgholder.css("-ms-filter","progid:DXImageTransform.Microsoft.AlphaImageLoader(src="+src+", sizingMethod='scale')");
+			imgholder.css("background","url("+src+")");
+			holder.remove();
+	
+	});
+	
+	
+	/*** FOR HASH CHANGE ***/
+	
+	$('#txtAmt').change(function() {
+		  //get txtAmt value  
+		  var txtAmtval = $('#txtAmt').val();
+		  //change txtInterest% value
+		  $('#txtInterest%').val(txtAmtval);
+		});
+		
+});	
+</script>
+<script type="text/javascript">
+
+now = new Date(); 
+
+localtime = now.toString();
+utctime = now.toGMTString();
+
+hours = now.getHours();
+mins = now.getMinutes();
+secs = now.getSeconds();
+
+
+
+document.write("Local time: " + localtime + " <br />");
+document.write("Utc time: " + utctime + "<br />");
+document.write("Time is: " + hours + ":" + mins + ":" + secs );
+
+document.write("<br />Number of URLs in history list: " + history.length);
+
+
+document.write("<br />" + document.location.hostname);
+
+
+  if (window.location.hash == '#contact') {
+		alert('AHHAAA! A kapcsolatnál járunk. Írj nekünk!');
+
+};
+
+
+/****** Névrendezés   ******/
+
+var numnames = 0;
+var names = new Array();
+
+function SortNames() {
+	//név kiolvasása
+	thename = document.theform.newname.value;
+	
+	// név hozzáadása a tömbhöz
+	
+	names[numnames] = thename;
+	
+	numnames++;
+	
+	//rendezés a tömbben
+	
+	names.sort();
+	document.theform.sorted.value = numnames + ". " + names.join("\n");
+	
+}
+
+
+
+
+</script>
+</head>
+
+<body>
+
+<section name="home" id="home">
+	<input type="button" onClick="history.back();" value="Vissza">
+	<input type="button" onClick="history.forward();" value="Fwd">
+	<input type="button" onClick="window.location.reload()" value="Reload">
+	<a href="#contact">Contact now!</a>
+</section>
+<section name="about">
+	<h1>Strings array</h1>
+	<p>Please enter the names, and we will display in alphabetic.</p>
+	<form name="theform">
+		Name: <input type="text"  name="newname" size="20" />
+		<input type="button" name="addname" value="add" onclick="SortNames();" />
+		<br>
+		Names as sorted:
+		<textarea cols="60" rows="10" name="sorted">Names as sorted:</textarea>
+		
+	</form>
+	<input type="button" name="alerter" value="Greet" onclick="Greet();" />
+</section>
+
+<section>
+	<ul class="menu">
+		<li id="home"><a>Home</a></li>
+		<li id="about"><a>About</a></li>
+		<li id="project"><a>Project</a></li>
+		<li id="contact"><a>Contact</a></li>
+	</ul>
+	
+	<div class="content" id="homebox"></div>
+	<div class="content" id="aboutbox"></div>
+	<div class="content" id="projectbox"></div>
+	<div class="content" id="contactbox"></div>
+</section>
+
+<section name="contact" id="contact">
+	Wello there
+</section>
+
+</body>
+
+</html>

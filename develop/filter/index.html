@@ -1,0 +1,131 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="style.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link href="../jqueryui/css/cupertino/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+<script src="../jqueryui/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="fancySelect.js"></script>
+</head>
+
+<body>
+	
+<div class="filtercontainer">	
+
+<ul class="categoryfilter">
+	<li>
+		<div class="ranged">
+			<div class="faker" id="szexi-info">Csábítási faktor</div>
+			<div class="stretch">	
+				<input type="text" id="szexi-skala" name="szexi-skala" style="border:0; color:#f6931f; font-weight:bold;"><br/>
+				<div id="szexi-skala-range"></div>
+			</div>	
+		</div>				
+	</li>
+	<li>
+		<div class="ranged">
+			<div class="faker" id="meret-info">Méret</div>
+			<div class="stretch">	
+				<input type="hidden" id="firstsize" name="firstsize">
+				<input type="hidden" id="lastsize" name="lastsize">
+				<input type="text" id="meret" name="meret" style="border:0; color:#f6931f; font-weight:bold;">				
+				<div id="meret-range"></div>
+			</div>	
+		</div>		
+	</li>
+	<li>
+		<select id="colorselect" name="szin">
+					<option value="0">Szín</option>
+					<option value="1">Piros</option>
+					<option value="2">Szürke</option>
+					<option value="3">Fekete</option>
+					<option value="4">Bézs</option>
+					<option value="5">Narancssárga</option>
+					<option value="6">Ecrü</option>
+					<option value="7">Rózsaszín</option>
+					<option value="8">Türkiz</option>
+					<option value="9">Mustár</option>
+		</select>
+	</li>
+	<li>
+		<div class="ranged2">
+			<div class="faker" id="pant-info">Pánt</div>
+			<div class="stretch">	
+				<input type="hidden" name="pant" id="pant" value="0" />
+				<ul>
+					<li class="pantelem" data-value="pantos">
+						<img class="pant" src="" alt="Pánt nélküli" />
+						<h4>Pánt nélküli</h4>
+					</li>
+					<li class="pantelem" data-value="nyak">
+						<img class="pant" src="" alt="Nyakpánt" />
+						<h4>Nyakpánt</h4>
+					</li>
+					<li class="pantelem" data-value="vall">
+						<img class="pant" src="" alt="Vállpánt" />
+						<h4>Vállpánt</h4>
+					</li>
+					<li class="pantelem" data-value="feloldalas">
+						<img class="pant" src="" alt="Féloldalas" />
+						<h4>Féloldalas</h4>
+					</li>
+				</ul>			
+			</div>	
+		</div>	
+	</li>
+	<li>
+		<div class="ranged2">
+			<div class="faker" id="dekoltazs-info">Dekoltázs</div>
+			<div class="stretch">
+				<input type="hidden" name="dekoltazs" id="dekoltazs" value="0" />
+				<ul>
+					<li>
+					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="Szív" src="" alt="Szív" />
+					<h4>Szív</h4>
+					</li>
+					<li>
+					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="Ívelt" src="" alt="Ívelt" />
+					<h4>Ívelt</h4>
+					</li>
+					<li>
+					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="Egyenes" src="" alt="Egyenes" />
+					<h4>Egyenes</h4>
+					</li>
+					<li>
+					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="Cakkos" src="" alt="Cakkos" />
+					<h4>Cakkos</h4>
+					</li>
+					<li>
+					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="V kivágásos" src="" alt="V kivágásos" />
+					<h4>V kivágásos</h4>
+					</li>
+				</ul>			
+			</div>	
+		</div>
+	</li>
+	<li>
+		<img src="clear.png" onclick="resetFilter()" alt="Szűrés elvetése" style="background:#dacbd9;"/>
+	</li>
+</ul>
+</div>
+
+
+
+<div class="productlist">
+<ul>
+	<li class="item" data-szexi="3" data-size="36, 37, 38, 39, 40, 41, 42" data-color="1" data-pant="nyak" data-category="gold"></li>
+	<li class="item" data-szexi="3" data-size="38, 39, 40, 41, 42" data-color="2" data-pant="nyak" data-category="premium"></li>
+	<li class="item" data-szexi="3" data-size="50, 51, 52, 53, 54, 56" data-color="3" data-pant="vall" data-category="exkluziv"></li>
+	<li class="item" data-szexi="1" data-size="36, 37, 38, 39, 40" data-color="4" data-pant="vall" data-category="vip"></li>
+
+</ul>
+</div>
+
+<script src="script.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+if (window['google'] != undefined && window['google']['loader'] != undefined) {
+if (!window['google']['feeds']) {
+window['google']['feeds'] = {};
+google.feeds.Version = '1.0';
+google.feeds.JSHash = '98fecbd9dc887ee9f7ca1ae2603f38ba';
+google.feeds.LoadArgs = 'file\75feeds\46v\0751';
+}
+google.loader.writeLoadTag("css", google.loader.ServiceBase + "/api/feeds/1.0/98fecbd9dc887ee9f7ca1ae2603f38ba/default+hu.css", false);
+google.loader.writeLoadTag("script", google.loader.ServiceBase + "/api/feeds/1.0/98fecbd9dc887ee9f7ca1ae2603f38ba/default+hu.I.js", false);
+}

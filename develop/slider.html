@@ -1,0 +1,369 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<style>
+
+
+	
+ul {
+	display:block;
+	list-style:none;
+	position:relative;
+	margin:40px;
+}	
+
+ul li {
+	display:none;
+	float:left;
+	width:400px;
+	height:400px;
+	overflow:hidden;
+	position:absolute;
+	top:0;
+	left:0;	
+}
+
+ul li img {
+	
+	
+}
+
+#next {
+	background:url('next.png') center center no-repeat;
+	width:72px;
+	height:72px;
+	position: absolute;
+	top:50%;
+	margin-top:-36px;
+	right:36px;
+	text-indent:-9999px;
+}
+
+#prev {	
+	background:url('prev.png') center center no-repeat;
+	width:72px;
+	height:72px;
+	position: absolute;
+	top:50%;
+	margin-top:-36px;
+	left:36px;
+	text-indent:-9999px;
+}
+
+.current {
+	display:block;
+	-webkit-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-moz-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-o-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	-ms-animation: fromRightAnim5 0.4s ease-in 0.4s both;
+	animation: fromRightAnim5 0.4s ease-in 0.4s both;
+}
+
+@-webkit-keyframes fromRightAnim5{
+	0%{ left: 0%; opacity: 0; }
+	100%{ left: 0%; opacity: 1; }
+}
+.hidden {
+	display:none;
+}
+
+
+
+#paginator{
+	margin:0;
+	display:block;
+	width:300px;
+	height:24px;
+	position:absolute;
+	bottom:10px;
+	left:50%;
+	z-index:1001;	
+	height:120px;
+	display:block;
+	
+	
+}
+
+#paginator li {
+	background:red;
+	display:block;
+	width:24px;
+	height:24px;
+	border-radius:50%;
+	margin:10px;
+	float:left;
+	position:relative;
+	z-index:10001;	
+	top:0;	
+	color:#fff;
+	text-align:center;
+	text-indent:-9999px;
+}
+
+#paginator li:hover {
+		background:black;
+		cursor:pointer;
+	
+}
+
+	
+</style>
+</head>
+
+<body>
+	
+<span id="prev">prev</span>	
+<span id="next">next</span>	
+<div id="wildslide">
+	<ul>
+		<li class="slide"><img src="http://richard.wildmind.hu/images/thumbs/awakening.jpg" alt="" /></li>
+		<li class="slide"><img src="http://richard.wildmind.hu/images/thumbs/risen_thumb.jpg" alt="" /></li>
+		<li class="slide"><img src="http://richard.wildmind.hu/images/thumbs/rapture_thumb.jpg" alt="" /></li>
+		<li class="slide"><img src="http://richard.wildmind.hu/images/thumbs/alien_thumb.jpg" alt="" /></li>
+	</ul>	
+</div>	
+
+
+<script type="text/javascript">
+
+
+// myslider objektum létrehozása, felparaméterezése
+/*mySlider = { 
+	autoplay: true,  
+	paginator: true,
+	buttons: "true",
+	pausehover: "true",
+	speed: 1000
+};*/
+
+var mySlider = new wildSlide (
+	true,
+	true,
+	true,
+	1000
+);
+
+//alap változók megadása
+
+shownext = document.getElementById("next");
+showprev = document.getElementById("prev");
+
+
+//wildSlide class
+function wildSlide( hasAutoplay, hasPaginator, hasButtons, speed ) {
+  
+   this.numslides = 0;
+   this.currentClass = "current";		
+   this.hiddenClass = "hidden";	
+   this.slides = new Array();
+   this.timer = 0;
+   this.currentslide = 0;
+   //autoplay sebessége
+   this.speed = speed;
+   //van e autoplay
+   this.hasAutoplay = hasAutoplay;
+   //van e lapozás
+   this.hasPaginator = hasPaginator;
+   //vannak e gombok
+   this.hasButtons = hasButtons;
+
+  /*************************************************************************************/
+  
+   this.paginator = function () {
+
+		$( "<ul></ul>" ).appendTo( "#wildslide" ).attr('id', 'paginator');		
+
+		for ( i=0; i<this.numslides; i++) {		
+			
+			var textValue = i;
+		    var ul = document.getElementById('paginator');
+		    var li = document.createElement("li");
+		    li.innerHTML = textValue;
+		    ul.insertBefore(li, ul.firstChild);	
+		    li.setAttribute("class", "dot");
+			
+		}; 	
+		
+		$(".dot").click(function(p) {
+			var target = $(this).index();
+			$(".current").removeClass(this.currentClass).addClass(this.hiddenClass);
+			$(slides[target]).removeClass(this.hiddenClass).addClass(this.currentClass);			
+		});
+   	
+   }	
+   
+   /*************************************************************************************/
+   
+   this.nextSlide = function () {
+		console.log(this.currentslide);
+		console.log(this.slides);
+		console.log(this.slides[this.currentslide]);
+		
+		//1 eset
+	    $(this.slides[this.currentslide]).removeClass(this.currentClass).addClass(this.hiddenClass);
+	    //2. eset
+	    //changeClass($(slides[currentslide]),current,hidden);	    
+	    
+	    this.currentslide++;
+	    $(this.slides[this.currentslide]).removeClass(this.hiddenClass);
+	    //ha a slider végére érünk, a sorszám legyen 0
+	    if (this.currentslide >= this.numslides) {
+	   		 this.currentslide = 0;
+	   		 $(this.slides[0]).removeClass(this.hiddenClass);
+	    }
+	    $(this.slides[this.currentslide]).addClass(this.currentClass);
+	    
+	    this.clearTimeout(this.timer);
+	}
+	
+	/*************************************************************************************/
+	
+	this.prevSlide = function () {
+	
+	    $(this.slides[this.currentslide]).removeClass(this.currentClass).addClass(this.hiddenClass);
+	    this.currentslide--;
+	    $(this.slides[this.currentslide]).removeClass(this.hiddenClass);
+	    if (this.currentslide < 0 ) {
+	  		this.currentslide = (this.numslides - 1);
+	  		$(this.slides[this.numslides - 1]).removeClass(this.hiddenClass);
+	    }
+	    $(this.slides[this.currentslide]).addClass(this.currentClass);
+	    
+	    this.clearTimeout(this.timer);
+	}
+	
+	/*************************************************************************************/
+	
+	this.autoPlay = function() {
+		
+		
+		$(this.slides[this.currentslide]).removeClass(this.currentClass).addClass(this.hiddenClass);
+	    this.currentslide++;
+	    $(this.slides[this.currentslide]).removeClass(this.hiddenClass);
+	    //ha a slider végére érünk, a sorszám legyen 0
+	    if (this.currentslide >= this.numslides) {
+	   		 this.currentslide = 0;
+	   		 $(this.slides[0]).removeClass(this.hiddenClass);
+	    }
+	    $(this.slides[this.currentslide]).addClass(this.currentClass);
+	    
+	    this.timer = setTimeout(this.autoPlay, this.speed);
+	}
+
+	/*******************---MAIN---***********************/
+   console.log('start');
+
+   // find all images with the class "slide"
+   elements = document.getElementsByTagName("li");
+   shownext = document.getElementById("next");
+   showprev = document.getElementById("prev");
+	
+   //lets build up all the stuffs
+
+   for (i=0; i < elements.length; i++) {   
+   
+      if (elements[i].className != "slide") continue;  
+         
+      this.slides[this.numslides] = elements[i];           
+      
+      // hide all but first element
+      if (this.numslides==0) {
+        this.currentslide = elements[i];
+        $(this.currentslide).addClass(this.currentClass);
+      } else {
+          $(elements[i]).addClass(this.hiddenClass);
+      }
+	
+		this.numslides++;
+
+
+
+		shownext.onclick = this.nextSlide;
+	    showprev.onclick = this.prevSlide;
+		
+ 	} // end for loop
+ 	
+
+   //if autoplay true, we set the speed 0
+   if (this.hasAutoplay === true) {
+   		Play = setTimeout(this.autoPlay(), this.speed);
+   } else {
+   		//alert(mySlider.autoplay);
+		this.speed = 0;
+   };
+   
+   //if paginator's value is true
+   if (this.hasPaginator === true) this.paginator();
+
+   //ha a buttons true megjelenítjük, ha nem, akkor nem
+   if (this.hasButtons === false) {
+   		shownext.style.display = "none";
+   		showprev.style.display = "none";
+   } else {
+   		shownext.style.display = "block";
+   		showprev.style.display = "block";
+   };  
+   
+} // end MakeSlideShow()
+
+
+
+
+
+/*
+
+
+function paginator(current, hidden) {
+		$( "<ul></ul>" ).appendTo( "#wildslide" ).attr('id', 'paginator');		
+
+		for ( i=0; i<numslides; i++) {		
+			
+			var textValue = i;
+		    var ul = document.getElementById('paginator');
+		    var li = document.createElement("li");
+		    li.innerHTML = textValue;
+		    ul.insertBefore(li, ul.firstChild);	
+		    
+		    li.setAttribute("class", "dot");
+			
+		}; 	
+		
+		$(".dot").click(function(p) {
+			var target = $(this).index();
+			$(".current").removeClass(current).addClass(hidden);
+			$(slides[target]).removeClass(hidden).addClass(current);			
+		});
+}		
+
+
+
+*/
+
+
+/*
+
+function changeClass( object, from, to ) {
+	
+	object.removeClass(from).addClass(to);
+	
+}
+
+*/
+
+
+
+
+// create the slideshow when the page loads
+window.onload=wildSlide;
+
+
+
+
+</script>
+</body>
+</html>

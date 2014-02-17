@@ -1,0 +1,38 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+function FillFrame(framename) {
+	
+	theframe=parent[framename];
+	theframe.document.open();
+	
+	//szöveg
+	theframe.document.write('<h1>Javascript output</h1>');
+	theframe.document.write('<p>This text is the ' + framename + "frame");
+	
+}
+
+</script>
+</head>
+
+<body>
+	<h1>Frame test</h1>
+	<form name="form1">
+		<input type="button" value="Top right" onClick="FillFrame('top_right');">
+		<input type="button" value="Bottom left" onClick="FillFrame('bottom_left');">
+		<input type="button" value="Bottom right" onClick="FillFrame('bottom_right');">	
+	</form>
+	
+
+</body>
+</html>

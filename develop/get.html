@@ -1,0 +1,49 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+(function($) {
+
+	$(document).ready(function() {
+	
+		var lis = $("ol li").get().reverse();
+		$("ol").empty();
+		
+		$.each(lis, function(i) {
+		
+			$("ol").append("<li>" + lis[i].innerHTML + "</li>");
+		
+		});
+		
+		$("ol li").reverse();
+	
+	
+	});
+})(jQuery);
+
+</script>
+</head>
+<body>
+<h2>New York Yankees</h2>
+<ol>
+	<li>Jetter</li>
+	<li>Famon</li>
+	<li>Teixeira</li>
+	<li>Posada</li>
+	<li>Swisher</li>
+	<li>Cano</li>
+	<li>Cabrera</li>
+	<li>Molina</li>
+	<li>Ramson</li>
+</ol>
+
+
+
+
+</body>
+</html>

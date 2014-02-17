@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+
+<style>
+	section[name="home"] {	
+		display:block;
+		height:600px;
+		width:960px;
+		margin:0 auto;
+		border:1px solid #ddd;
+		
+	}
+	section {	
+		display:block;
+		height:600px;
+		width:960px;
+		margin:0 auto;
+		border:1px solid #ddd;
+		
+	}
+	
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	if ($('body').css('width') === '480px') {
+	    $('.nav li').click(function(){
+						$('.navigation').animate({ height: '155' }, 400, 'linear');
+					    $('.nav').animate({ height: '0' }, 400, 'linear');
+		 });
+	};
+	
+	
+	
+	$(".menu li a").click(function() {
+			$(".menu li").css("border","none");
+		    $(this).parent().css("border","1px solid red");
+		    
+		    baseurl = $(this).parent().attr('id');
+			src = "#" + baseurl + "box";
+					
+			$('.content').hide();
+			$(src).show().css({
+				'border':'1px solid red',
+				'width':'480px',
+				'height':'360px'				
+			});
+
+		    alert(src);	
+
+		});
+	
+		
+});	
+</script>
+
+</head>
+
+<body>
+
+
+<section>
+	<ul class="menu">
+		<li id="home"><a>Home</a></li>
+		<li id="about"><a>About</a></li>
+		<li id="project"><a>Project</a></li>
+		<li id="contact"><a>Contact</a></li>
+	</ul>
+	
+	<div class="content" id="homebox"></div>
+	<div class="content" id="aboutbox"></div>
+	<div class="content" id="projectbox"></div>
+	<div class="content" id="contactbox"></div>
+</section>
+
+
+
+</body>
+
+</html>

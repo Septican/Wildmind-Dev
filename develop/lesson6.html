@@ -1,0 +1,102 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+/* Greeet */
+
+function Greet(who) {
+	alert('Oh hai ' + who);
+	
+}
+Greet("Fred");
+
+/*
+
+function Average(a,b,c,d) {
+	result = (a + b + c + d) / 4;
+	return result;
+}
+
+score = Average(3,4,5,6);
+document.write("The average is: " + score);
+
+
+*/
+
+
+//föggvény meghatározása
+
+function Card(name,address,work,home) {
+	this.name = name;
+	this.address = address;
+	this.work = work;
+	this.home = home;
+	this.PrintCard = PrintCard;
+}
+
+function PrintCard() {
+	line1 = "Name: " + this.name +  "<br />";
+	line2 = "Address: " + this.address +  "<br />";
+	line3 = "Work: " + this.work +  "<br />";
+	line4 = "Home: " + this.home +  "<br />";
+	document.write(line1,line2,line3,line4);
+}
+
+// objektumok meghatározása 2 módon
+
+tom = new Card("Tom Jones", "123 Elm Street", "555-1234", "555-9876");
+
+holmes = new Card();
+holmes.name = "Sherlock Holmes";
+holmes.address = "221B Baker Street";
+holmes.work = "555-4567;"
+holmes.home = "555-4444"
+
+// objektumok megjelenítése
+
+tom.PrintCard();
+holmes.PrintCard();
+
+
+
+// valami header szar
+
+
+function addhead(level) {
+	html = "H" + level;
+	text = this.toString();
+	start = "<" + html + ">";
+	end = "</" + html + ">";
+	
+	return start + text + end; 
+}
+
+//String.prototype = document.write ("This is a heading 1"
+
+String.prototype.heading = addhead;
+document.write ("This is a heading 1".heading(1));
+document.write ("This is a heading 2".heading(2));
+document.write ("This is a heading 3".heading(3));
+
+
+</script>
+</head>
+
+<body>
+	<h1>Függvények</h1>
+	<p>the following is the result of the call:</p>
+	
+	
+	
+</body>
+</html>

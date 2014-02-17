@@ -1,0 +1,135 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+function ChangeTitle() {
+	if (!document.getElementById) return;
+	var newtitle = document.form1.newtitle.value;
+	var head1 = document.getElementById("head1");
+	head1.firstChild.nodeValue = newtitle; 
+	
+}
+
+//-----------------------
+
+
+
+function AddText() {
+	if (!document.getElementById) return;
+	var sentence = document.form2.sentence.value;
+	var node = document.createTextNode(" " + sentence);
+	document.getElementById("p1").appendChild(node);
+	document.form2.sentence.value="";
+	
+}
+
+
+function Toggle(e) {
+	
+	if (!document.getElementById) return;
+	//esemény objektum lekérdezése
+	if (!e) var e = window.event;
+	
+	//melyikre kattintottak?
+	whichlink = (e.target) ? e.target.id : e.srcElement.id;
+	
+	
+	//menüobjektum lekérdezése
+	obj = document.getElementById(whichlink + "menu");
+	//látható a menu?
+	visible = (obj.style.display=="block");
+	//hivatkozás(key) lekérdezése
+	key = document.getElementById(whichlink);
+	
+	//keyname = key.innerHTML.substring(3); megegyezik a köv sorral - (3)al levágjuk az első 3 karaktert
+	keyname = key.firstChild.nodeValue.substring(3);
+	
+	alert(keyname);
+	
+	if (visible) {
+		obj.style.display = "none";
+		key.firstChild.nodeValue = "[+]" + keyname;				
+	}
+	else {		
+		obj.style.display = "block";
+		key.firstChild.nodeValue = "[-]" + keyname;	
+	}
+}
+
+document.getElementById("product").onclick=Toggle;
+document.getElementById("support").onclick=Toggle;
+document.getElementById("contact").onclick=Toggle;
+
+</script>
+
+<style>
+	#productsmenu, #supportmenu, #contactmenu {
+		display:none;
+		margin-left:20px;
+		
+	}
+	
+</style>
+</head>
+
+<body>
+	<h1 id="head1">Dynamic text in javascript</h1>
+	<p>Using W3C DOM, you can change the heading. Enter a new title and click on the change button.</p>
+<form name="form1">
+	<input type="text" name="newtitle" size="25">
+	<input type="button" value="Change" onclick="ChangeTitle();" >
+</form>
+<br />
+----------------------------------------------------------------
+<h2>How to add text</h2>
+<p id="p1">Using W3C DOM, you can change the heading. Enter a new title and click on the change button.</p>
+<form name="form2">
+	<input type="text" name="sentence" size="25">
+	<input type="button" value="Add text" onclick="AddText();" >
+<br />
+----------------------------------------------------------------	
+	
+<h2>Navigation</h2>
+
+<ul>
+	<li>
+		<a id="products" href="#" onclick="Toggle();">[+] Products</a>
+		<ul id="productsmenu">
+			<li>Product 1</li>
+			<li>Product 2</li>
+			<li>Product 4</li>
+		</ul>	
+	</li>
+	<li>
+		<a id="support" href="#" onclick="Toggle();">[+] Support</a>
+		<ul id="supportmenu">
+			<li>Support 1</li>
+			<li>Support 2</li>
+			<li>Support 4</li>
+		</ul>	
+	</li>
+	<li>
+		<a id="contact" href="#" onclick="Toggle();">[+] Contact</a>
+		<ul id="contactmenu">
+			<li>Contact 1</li>
+			<li>Contact 2</li>
+			<li>Contact 4</li>
+		</ul>	
+	</li>
+	
+</ul>	
+
+
+
+
+</body>
+</html>
