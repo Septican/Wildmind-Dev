@@ -78,36 +78,16 @@
 			</div>	
 		</div>	
 	</li>
-	<li>
-		<div class="ranged2">
-			<div class="faker" id="dekoltazs-info">Dekoltázs</div>
-			<div class="stretch">
-				<input type="hidden" name="dekoltazs" id="dekoltazs" value="0" />
-				<ul>
-					<li>
-					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="Szív" src="" alt="Szív" />
-					<h4>Szív</h4>
-					</li>
-					<li>
-					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="Ívelt" src="" alt="Ívelt" />
-					<h4>Ívelt</h4>
-					</li>
-					<li>
-					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="Egyenes" src="" alt="Egyenes" />
-					<h4>Egyenes</h4>
-					</li>
-					<li>
-					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="Cakkos" src="" alt="Cakkos" />
-					<h4>Cakkos</h4>
-					</li>
-					<li>
-					<img class="dekoltazs" onclick="selectPD($(this),$('#dekoltazs'));" data-value="V kivágásos" src="" alt="V kivágásos" />
-					<h4>V kivágásos</h4>
-					</li>
-				</ul>			
-			</div>	
-		</div>
-	</li>
+    <li>
+        <div class="ranged">
+            <div class="faker" id="price-info">Termék ár</div>
+            <div class="stretch">
+                <input type="hidden" id="pricebox" name="pricebox">
+                <input type="text" id="price" name="price" style="border:0; color:#f6931f; font-weight:bold;">
+                <div id="price-range"></div>
+            </div>
+        </div>
+    </li>
 	<li>
 		<img src="clear.png" onclick="resetFilter()" alt="Szűrés elvetése" style="background:#dacbd9;"/>
 	</li>
@@ -118,10 +98,10 @@
 
 <div class="productlist">
 <ul>
-	<li class="item" data-szexi="3" data-size="36, 37, 38, 39, 40, 41, 42" data-color="1" data-pant="nyak" data-category="gold"></li>
-	<li class="item" data-szexi="3" data-size="38, 39, 40, 41, 42" data-color="2" data-pant="nyak" data-category="premium"></li>
-	<li class="item" data-szexi="3" data-size="50, 51, 52, 53, 54, 56" data-color="3" data-pant="vall" data-category="exkluziv"></li>
-	<li class="item" data-szexi="1" data-size="36, 37, 38, 39, 40" data-color="4" data-pant="vall" data-category="vip"></li>
+	<li class="item" data-szexi="3" data-size="36, 37, 38, 39, 40, 41, 42" data-color="1" data-pant="nyak" data-category="gold" data-price="12000"></li>
+	<li class="item" data-szexi="3" data-size="38, 39, 40, 41, 42" data-color="2" data-pant="nyak" data-category="premium" data-price="24000"></li>
+	<li class="item" data-szexi="3" data-size="50, 51, 52, 53, 54, 56" data-color="3" data-pant="vall" data-category="exkluziv" data-price="20000"></li>
+	<li class="item" data-szexi="1" data-size="36, 37, 38, 39, 40" data-color="4" data-pant="vall" data-category="vip" data-price="10000"></li>
 
 </ul>
 </div>
