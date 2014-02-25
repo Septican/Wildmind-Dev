@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+
+    <script type="text/javascript">
+
+        // Cookies are used to store information on the clients hard drive
+        // You can only access the information you stored on the clients machine
+        // You can’t access other websites cookies
+        // Cookies contain a name, value, expiration, directory that can access it and the domain that can access it
+
+        // Get the value from the text box called getme
+        // Splits all of the cookies and puts them in an array
+
+
+
+        function createCookie(fname,lname,phone) {
+
+            var expDate = new Date();
+
+            expDate.setMonth(expDate.getMonth() + 1);
+
+            var cookieFirstName = document.getElementById("firstname").value;
+            var cookieLastName = document.getElementById("lastname").value;
+            var cookiePhone = document.getElementById("phone").value;
+
+
+
+
+            // Retrieves cookie value from the node that was past to the function
+
+            document.cookie = fname + "=" + cookieFirstName + ";path=/;expires=" + expDate.toGMTString();
+            document.cookie += lname + "=" + cookieLastName + ";path=/;expires=" + expDate.toGMTString();
+            document.cookie += phone + "=" + cookiePhone + ";path=/;expires=" + expDate.toGMTString();
+
+            expDate.toGMTString();
+
+            console.log(document.cookie);
+
+        }
+
+        function deleteAllCookie() {
+
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+
+
+            console.log(document.cookie);
+
+        }
+
+        function deleteCookie() {
+
+            var cookieToDel = document.getElementById("deleteme").value;
+
+            createCookie(cookieToDel,"",-1);     	// Creates a cookie with a name value and expiration in days
+
+        }
+
+
+    </script>
+
+
+
+
+</head>
+<body>
+
+<h3>This site requires JavaScript</h3>
+
+<table>
+    <tr>
+        <td>
+            Enter your first name
+        </td>
+        <td>
+            <input type="text" id="firstname"  />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Enter your last name
+        </td>
+        <td>
+            <input type="text" id="lastname"  />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Enter your phone
+        </td>
+        <td>
+            <input type="text" id="phone"  />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Cookie to delete
+        </td>
+        <td>
+            <input type="text" id="deleteme" onblur="deleteCookie();" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="Send" onclick="createCookie('firstname','lastname','phone')" />
+            <input type="button" value="Clear All" onclick="deleteCookie()" />
+        </td>
+
+    </tr>
+</table>
+<script type="text/javascript">
+
+
+
+</script>
+
+</body>
+
+</html>

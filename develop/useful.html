@@ -46,7 +46,7 @@ $('.add_to_cart').click( function() {
 	});
 
 
-// Changing the forst word's color of h2 by adding it into a span
+// Changing the first word's color of h2 by adding it into a span
 	
 	var htext = $('.welcomepanel .title h2').text();
 	explodedText = htext.split(' ');	
@@ -387,6 +387,45 @@ $(function() {
 $(document).ready(function(){
 	$("#innercontainer").recognizeGallery();
 });
+
+
+
+// adott url esetére elvégzendő műveletek
+
+if(window.location.href.indexOf("/oltony-kosztum") > -1) {
+    $(".page").css({
+        "background":"url('../../images/frontend/hbg2.png') center -21px no-repeat"
+    });
+
+    $("h1").hide();
+
+    $("h2").css({
+        "margin-top":"20px",
+        "font-size":"48px"
+    });
+    $('.path').css({"background":"none"	});
+}
+
+
+// minden li elemben a h3 szöveget beillesztjük közvetlenül az li a-ba található szövegbe, kiegészítve
+
+var oltko = $(".oltko > ul > li");
+
+$.each(oltko, function() {
+
+ oltkotext = $(this).find("h3").text();
+ $(this).find('> a').append("<div class='ch-item'><div class='ch-info'><span>Tovább a " + oltkotext + "okhoz</span></div></div>");
+
+
+ });
+
+if	( oltko.length > 0 ) {
+    $("body").css({
+        "background":"url('/images/frontend/catbg.jpg') center 80px no-repeat"
+    })
+};
+
+
 
 
 

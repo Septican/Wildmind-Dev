@@ -1,0 +1,403 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wild Mind</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- CSS Code --> 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+// infinite loop animation
+
+$(document).ready(function() {
+  		$('.scrolldownarrow').queue(function(moveit) {
+			$(this).animate({"top" : "65%"},600);
+			$(this).animate({"top" : "57%"}, 600);
+			$(this).queue(arguments.callee);
+			moveit();
+		});
+	}); 
+
+
+//simple select value check with submit
+
+
+$('.add_to_cart').click( function() {
+	
+		size = $('select[name="size"]').val();
+	
+		if ( size == "setsize" ) {
+		
+			alert("Kérjük válasszon méretet!");
+			
+		
+		}
+		else {
+		
+			$('#add_to_basket_form').submit();
+		}
+		
+	});
+
+
+// Changing the forst word's color of h2 by adding it into a span
+	
+	var htext = $('.welcomepanel .title h2').text();
+	explodedText = htext.split(' ');	
+	explodedText[0] = '<span>'+explodedText[0]+'</span>';	
+	htext = explodedText.join(' ');
+	$('.welcomepanel .title h2').html(htext);
+	
+	
+
+//Smooth scrolling to top of page
+//Let’s start this list by a very popular and useful snippet: Those 4 lines will allow your visitors to smooth scrool to the top of the page simply by clicking a a link (with #top id) located at the bottom of your page.
+
+$("a[href='#top']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, "slow");
+  return false;
+});
+
+//Clone table header to the bottom of table
+//For a better readability of your tables, it can be a good idea to clone the table header on the bottom of the table. This is what this useful snippet do.
+
+var $tfoot = $('<tfoot></tfoot>');
+$($('thead').clone(true, true).children().get().reverse()).each(function(){
+    $tfoot.append($(this));
+});
+$tfoot.insertAfter('table thead');
+
+//Load external content
+//Do you need to add some external content to a div? It is pretty easy to do with jQuery, as demonstrated in the example below:
+$("#content").load("somefile.html", function(response, status, xhr) {
+  // error handling
+  if(status == "error") {
+    $("#content").html("An error occured: " + xhr.status + " " + xhr.statusText);
+  }
+});
+
+//Equal height columns
+//When you’re using columns to display content on your site, it definitely look better if the columns have an equal height. The code below will take all div elements with the .col class and will adjust their heights according to the bigger element. Super useful!
+var maxheight = 0;
+$("div.col").each(function(){
+  if($(this).height() > maxheight) { maxheight = $(this).height(); }
+});
+
+$("div.col").height(maxheight);
+
+//Table Stripes (Zebra)
+//When displaying data on a table, alternating colors on each row definitely increases readability. Here’s a snippet to automatically add a CSS class to one row of out two.
+
+$(document).ready(function(){                             
+     $("table tr:even").addClass('stripe');
+});
+
+//Partial page refresh
+//If you need to refresh only a portion of a page, the 3 lines of code below will definitely help. In this example, a #refresh div is automatically refreshed every 10 seconds
+setInterval(function() {
+$("#refresh").load(location.href+" #refresh>*","");
+}, 10000); // milliseconds to wait
+
+//Preload images
+//jQuery make it easy to preload images in the background so visitors won’t have to wait forever when they would like to display an image. This code is ready to use, just update the image list on line 8.
+$.preloadImages = function() {
+       for(var i = 0; i<arguments.length; i++) {
+               $("<img />").attr("src", arguments[i]);
+       }
+}
+
+$(document).ready(function() {
+       $.preloadImages("hoverimage1.jpg","hoverimage2.jpg");
+});
+
+//Open external links in a new tab/window
+//The target="blank" attribute allows you to force opening of links in new windows. While it is relevant to open external links in a new tab or window, same domain links should definitely be opened in the same window.
+//This code detect if a link is external, and if yes, adds a target="blank" attribute to it.
+$('a').each(function() {
+   var a = new RegExp('/' + window.location.host + '/');
+   if(!a.test(this.href)) {
+       $(this).click(function(event) {
+           event.preventDefault();
+           event.stopPropagation();
+           window.open(this.href, '_blank');
+       });
+   }
+});
+
+//Div full Width/Height of viewport with jQuery
+//This handy piece of code allows you to create a full width/height div according to the viewport. The code also handles window resizing. Great for modal dialogs or popups.
+
+// global vars
+var winWidth = $(window).width();
+var winHeight = $(window).height();
+
+// set initial div height / width
+$('div').css({
+    'width': winWidth,
+	'height': winHeight,
+});
+
+// make sure div stays full width/height on resize
+$(window).resize(function(){
+    $('div').css({
+    'width': winWidth,
+    'height': winHeight,
+});
+});
+
+//Test password strength
+//When you let users defining their password, it is generally a good thing to indicate how strong the password is. This is exactly what this code do.
+
+/*
+HTML CODE HERE:
+<input type="password" name="pass" id="pass" />
+<span id="passstrength"></span>
+
+*/
+
+$('#pass').keyup(function(e) {
+     var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+     var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+     var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+     if (false == enoughRegex.test($(this).val())) {
+             $('#passstrength').html('More Characters');
+     } else if (strongRegex.test($(this).val())) {
+             $('#passstrength').className = 'ok';
+             $('#passstrength').html('Strong!');
+     } else if (mediumRegex.test($(this).val())) {
+             $('#passstrength').className = 'alert';
+             $('#passstrength').html('Medium!');
+     } else {
+             $('#passstrength').className = 'error';
+             $('#passstrength').html('Weak!');
+     }
+     return true;
+});
+
+//Image resizing using jQuery
+//Although you should resize your images on server side (using PHP and GD for example) it can be useful to be able to resize images using jQuery. Here’s a snippet to do it.
+
+$(window).bind("load", function() {
+	// IMAGE RESIZE
+	$('#product_cat_list img').each(function() {
+		var maxWidth = 120;
+		var maxHeight = 120;
+		var ratio = 0;
+		var width = $(this).width();
+		var height = $(this).height();
+	
+		if(width > maxWidth){
+			ratio = maxWidth / width;
+			$(this).css("width", maxWidth);
+			$(this).css("height", height * ratio);
+			height = height * ratio;
+		}
+		var width = $(this).width();
+		var height = $(this).height();
+		if(height > maxHeight){
+			ratio = maxHeight / height;
+			$(this).css("height", maxHeight);
+			$(this).css("width", width * ratio);
+			width = width * ratio;
+		}
+	});
+	//$("#contentpage img").show();
+	// IMAGE RESIZE
+});
+
+//Automatically load content on scroll
+//Some websites such as Twitter loads content on scroll. Which means that all content is dynamically loaded on a single page as long as you scroll down.
+
+var loading = false;
+$(window).scroll(function(){
+	if((($(window).scrollTop()+$(window).height())+250)>=$(document).height()){
+		if(loading == false){
+			loading = true;
+			$('#loadingbar').css("display","block");
+			$.get("load.php?start="+$('#loaded_max').val(), function(loaded){
+				$('body').append(loaded);
+				$('#loaded_max').val(parseInt($('#loaded_max').val())+50);
+				$('#loadingbar').css("display","none");
+				loading = false;
+			});
+		}
+	}
+});
+
+$(document).ready(function() {
+	$('#loaded_max').val(50);
+});
+
+//Check if an image is loaded
+//Here’s a snippet I often use when working with images, as it is the best way to know if an image is loaded or not.
+
+var imgsrc = 'img/image1.png';
+$('<img/>').load(function () {
+    alert('image loaded');
+}).error(function () {
+    alert('error loading image');
+}).attr('src', imgsrc);
+
+//Sort a list alphabetically
+//On some cases, it can be very useful a sort a long list by alphabetical order. This snippet take any list and order its element alphabetically.
+
+$(function() {
+    $.fn.sortList = function() {
+    var mylist = $(this);
+    var listitems = $('li', mylist).get();
+    listitems.sort(function(a, b) {
+        var compA = $(a).text().toUpperCase();
+        var compB = $(b).text().toUpperCase();
+        return (compA < compB) ? -1 : 1;
+    });
+    $.each(listitems, function(i, itm) {
+        mylist.append(itm);
+    });
+   }
+
+    $("ul#demoOne").sortList();
+
+});
+
+// ANCCHOR SCROLL TO AN ELEMENT/DIV
+
+$(".showdetails").click(function() {
+		    $('html, body').animate({
+		        scrollTop: $("#showit").offset().top
+		    }, 3000);
+		});
+		
+
+//Force an image to fill a div fully, even in IE8
+
+$('.holder').each(function(){
+			holder = $(this);
+			imgholder = holder.parent();
+			src = holder.attr('src');
+			imgholder.css("filter","progid:DXImageTransform.Microsoft.AlphaImageLoader(src="+src+", sizingMethod='scale')");
+			imgholder.css("-ms-filter","progid:DXImageTransform.Microsoft.AlphaImageLoader(src="+src+", sizingMethod='scale')");
+			imgholder.css("background","url("+src+")");
+			holder.remove();
+	
+	});		
+	
+	
+//SetActiveMenuPlugin kiegészítve azzal, hogy ha van lenyíló rész, akkor az adott főmenü elem nem kattintható
+
+			
+			$(function() {
+				
+				$.fn.recognizeActiveMenu = function( activeClassName, removeClassName ) {
+					
+					links = this.find('a');			
+					href  = window.location.href;					
+					match = 0; 
+					first = null;
+					
+					$.each(links, function() {						
+						link = $(this);						
+						if ( href.indexOf( link.attr('href') ) >= 0 ) {							
+							link.attr( 'class', activeClassName);							
+							match++;							
+							if( first === null ) first = link;								
+						}					
+						if( link.parent().find('.submenu').length > 0 ) {							
+							link.click(function(){return false;});
+						}						
+					});					
+					if( match > 1 ) {						
+						first.removeClass( removeClassName );						
+					}					
+					return this;
+				};			
+			}( jQuery ));
+			
+			
+			
+			$(document).ready(function(){
+				$('.mainmenu').recognizeActiveMenu('tab menuactive','menuactive');
+			
+			});
+
+
+
+// Probléma: csak 3 sor szöveg jelenjen meg, ha ennél több, legyen egy lenyitó gomb
+// ez esetben a szöveg <p> magassága 1.6em, 12px betűméret, a szölő doboz(thedescription) magassága pedig ezért 4.8em = 58px so....
+
+
+if( $('.thedescription').height() > 58 ) {
+    $('.showmore').show();
+}
+else {
+    $('.showmore').hide();
+};
+
+$('.thedescription').css({
+    "height" : "4.8em",
+    "display": "block"
+});
+
+$('.showmore').toggle(
+        function(){
+            $('.thedescription').css({
+                "height" : "auto",
+                "display": "table"
+            });
+            $('.showmore').text('« Rövidebb leírás');
+        },
+        function(){
+            $('.thedescription').css({
+                "height" : "4.8em",
+                "display": "block"
+            });
+            $('.showmore').text('... Bővebb leírás »');
+        });
+        
+        
+// Blocksit galéria felépítés fancybox-al, az képeket a target divbe kell csak beszórni, a többi felépül
+
+
+$(function() {
+				
+			$.fn.recognizeGallery = function() {
+				
+					theimg = this.find('img');		
+
+					$.each(theimg, function() {		
+						
+						img = $(this);						
+						img.addClass("targetimg").removeAttr("style");
+						src = img.attr("src");
+						img.wrap('<div class="gridbox"><a rel="example_group" href='+ src +' class=""></a></div>');
+
+									
+					});					
+
+			};			
+			
+}( jQuery ));
+
+
+$(document).ready(function(){
+	$("#innercontainer").recognizeGallery();
+});
+
+
+
+</script>
+</head>
+
+<body>
+	<h1>SAVE SAVE SAVE</h1>
+
+	
+	
+	
+</body>
+</html>

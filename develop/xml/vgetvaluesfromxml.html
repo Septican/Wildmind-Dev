@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="script.js"></script>
+</head>
+<body>
+
+<script>
+    xmlDoc=loadXMLDoc("books.xml");
+
+    books=xmlDoc.getElementsByTagName("book");
+    years=xmlDoc.getElementsByTagName("book");
+
+
+    //minden könyv elemhez
+    for (i=0;i<books.length;i++)
+    {
+        newel=xmlDoc.createElement("edition");
+        newtext=xmlDoc.createTextNode("first");
+        newel.appendChild(newtext);
+        books[i].appendChild(newel);
+    }
+
+    //Output all titles and editions
+    titles=xmlDoc.getElementsByTagName("title");
+    editions=xmlDoc.getElementsByTagName("edition");
+
+
+    for (i=0;i<titles.length;i++)
+    {
+        document.write(titles[i].childNodes[0].nodeValue);
+        document.write(" - Edition: ");
+        document.write(editions[i].childNodes[0].nodeValue);
+        document.write("<br>");
+    }
+</script>
+<br />------------------------------------------------------
+<br />its working bitches ;)))
+</body>
+</html>

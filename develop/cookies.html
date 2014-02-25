@@ -1,0 +1,177 @@
+<html>
+
+<head>
+
+
+    <script type="text/javascript">
+
+        // Cookies are used to store information on the clients hard drive
+
+        // You can only access the information you stored on the clients machine
+
+        // You can’t access other websites cookies
+
+        // Cookies contain a name, value, expiration, directory that can access it and the domain that can access it
+
+            function getACookie(name) {
+
+                var cookieName = document.getElementById("getme").value;
+                var allCookies = document.cookie.split(";");
+                var cookieData = "";
+
+                for (var i=0; i < allCookies.length; i++) {
+
+                        if ((allCookies[i].indexOf(cookieName)) != -1) {     	 // Test to see if string contains the cookie name
+
+                                match = allCookies[i].replace(" ", "");    	 // Deletes whitespace that may proceed the cookie name
+
+                                cookieData = match.substr((cookieName.length + 1));    	 // Assign the substring that follows the cookie name
+
+                                alert(cookieName + " " + cookieData);
+
+                        }
+
+                }
+
+            }
+
+            function createCookie(newCookie) {
+
+                    var expDate = new Date();
+
+                    expDate.setMonth(expDate.getMonth() + 1);    	// Adds 1 month ahead as the expiration date
+
+                    var cookieVal = document.getElementById(newCookie).value;
+
+                if ( cookieVal.length > 0 ) {
+
+                    // Retrieves cookie value from the node that was past to the function
+
+                    document.cookie = newCookie + "=" + cookieVal + ";path=/;expires=" + expDate.toGMTString();    	// Creates the cookie
+
+                }
+
+                else {
+
+                    console.log("empty place");
+
+                }
+
+            }
+
+            function deleteCookie() {
+
+                 var cookieToDel = document.getElementById("deleteme").value;
+
+                 createCookie(cookieToDel,"",-1);     	// Creates a cookie with a name value and expiration in days
+
+            }
+
+
+            function checker() {
+
+                getvalue = document.getElementById("getme").value;
+                getACookie(getvalue);
+
+            };
+
+
+            function sendAll() {
+
+                var elems = document.getElementsByClassName('req');
+
+                for ( i = 0; i < elems.length; i++) {
+
+                    thekey = elems[i].getAttribute("id");
+                    console.log("i love cookies ^^ " + thekey + " sorszam: " + i);
+
+                    createCookie(thekey);
+
+                }
+
+            }
+
+
+
+
+
+</script>
+
+
+
+
+
+</head>
+<body>
+
+<h3>This site requires JavaScript</h3>
+
+<table>
+    <tr>
+        <td>
+            Enter your first name
+        </td>
+        <td>
+            <input type="text" id="firstname" onblur="createCookie('firstname');" class="req" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Enter your last name
+        </td>
+        <td>
+            <input type="text" id="lastname" onblur="createCookie('lastname');" class="req" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Enter your phone
+        </td>
+        <td>
+            <input type="text" id="phone" onblur="createCookie('phone');" class="req" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Enter your email
+        </td>
+        <td>
+            <input type="text" id="email" onblur="createCookie('email');" class="req" />
+        </td>
+    </tr>
+    <tr>
+
+        <td>
+            <input type="button" value="Send all" id="sender" onclick="sendAll()" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Cookie to delete
+        </td>
+        <td>
+            <input type="text" id="deleteme" onblur="deleteCookie();" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Cookie to Get
+        </td>
+        <td>
+            <input type="text" id="getme" />
+            <input type="button" value="Get it" id="getthat" onclick="checker()" />
+        </td>
+    </tr>
+</table>
+<script type="text/javascript">
+
+
+    document.write("Every cookie: " + document.cookie);
+
+
+
+</script>
+
+</body>
+
+</html>
