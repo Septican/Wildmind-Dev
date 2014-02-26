@@ -1,9 +1,7 @@
 <html>
-
 <head>
-
-
-    <script type="text/javascript">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
 
         // Cookies are used to store information on the clients hard drive
 
@@ -88,9 +86,19 @@
                     createCookie(thekey);
 
                 }
+                
+                var theCookies = document.cookie.split(";");
+                
+                	$.each(theCookies, function(key){
+            	
+        		    	$("#result").append("<li>" + key + " : " + this + "</li>");
+            	
+		            });
+
 
             }
-
+            
+            
 
 
 
@@ -163,6 +171,9 @@
         </td>
     </tr>
 </table>
+
+
+<ul id="result"></ul>
 <script type="text/javascript">
 
 
